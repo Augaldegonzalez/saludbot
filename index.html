@@ -11,12 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Chosen Palette: Vibrant Teal & Gold with Animated Gradients -->
-    <!-- Application Structure Plan: The application structure remains a task-oriented SPA (Inicio, Metas, etc.). This update introduces real Gemini API calls. The Dashboard's "Consejo del Día" is now powered by an LLM, and a new "Meal Analysis" feature has been added to the Tools section, also powered by Gemini. -->
+    <!-- Application Structure Plan: The application structure is a task-oriented SPA. This update adds a new "Desarrolladores" (Developers) section to credit the student team, as requested. The navigation has been updated accordingly. -->
     <!-- Visualization & Content Choices: 
-        - Report Info: Introduction section. Goal: Create a high-impact, welcoming experience. Method: Redesigned the "Inicio" section into a two-column hero layout featuring an animated mock-up of the app interface built with HTML/CSS. Justification: Provides a more "spectacular" and visually engaging introduction as requested. Library: CSS for animations.
-        - Report Info: Calorie Calculator. Goal: Enhance usability with AI. Method: Added a "✨ Analizar Comida" button that sends the current meal list to the Gemini API for nutritional analysis. Justification: Adds significant value and demonstrates a practical use of LLMs. Library: JS (fetch).
-        - Report Info: AI recommendation. Goal: Provide genuine, dynamic advice. Method: Replaced the simulated AI coach with a real Gemini API call that uses the user's latest data to generate a personalized tip. Justification: Fulfills the core promise of an "intelligent" assistant. Library: JS (fetch).
-        - Report Info: Core functionality (Dashboard, editable tables). Goal: Maintain existing functionality. Method: No changes to the core logic, only visual enhancements. Interaction: On-scroll animations, glassmorphism cards, and interactive charts remain. Justification: The core app was well-received; changes focus on specific user requests. Library: JS (Intersection Observer), Chart.js.
+        - Report Info: Developer Credits. Goal: Add a new section to credit the students. Method: A new section with the ID "desarrolladores" was created, containing a title and a grid list of the provided names. Justification: Fulfills a direct user request to add a credits page. Library: N/A.
+        - Report Info: Landing Page Logos. Goal: Increase visual presence. Method: Increased the size of the `colegio.jpg` and `Logo.jpg` images using larger Tailwind CSS height classes. Justification: Fulfills a direct user request for more prominent branding on the landing page. Library: N/A.
+        - Report Info: Header Branding. Goal: Simplify and clarify branding. Method: Replaced the header logo image with a large H1 text element for "SALUDBOT" plus an icon. Justification: Addresses user feedback to remove the top logo and use text instead. Library: N/A.
         - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
     <style>
@@ -151,6 +150,11 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+        #hero {
+            background: linear-gradient(-45deg, #e0f2f1, #d1fae5, #e0f2fe, #f3e8ff);
+            background-size: 400% 400%;
+            animation: gradient-animation 20s ease infinite;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -159,15 +163,16 @@
         <div class="container mx-auto px-6">
             <div class="flex items-center justify-between h-20">
                 <div class="flex items-center space-x-3">
-                     <div class="bg-teal-600/10 p-2 rounded-full"><span class="text-xl">🌿</span></div>
-                    <h1 class="text-2xl font-bold text-teal-700">SaludBot</h1>
+                     <div class="bg-teal-600/10 p-2 rounded-full"><span class="text-2xl">🌿</span></div>
+                    <h1 class="text-3xl font-bold text-teal-700">SALUDBOT</h1>
                 </div>
                 <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#inicio" class="nav-link px-1 py-2 text-sm font-medium text-gray-500 hover:text-teal-700">Inicio</a>
-                    <a href="#metas" class="nav-link px-1 py-2 text-sm font-medium text-gray-500 hover:text-teal-700">Mis Metas</a>
-                    <a href="#herramientas" class="nav-link px-1 py-2 text-sm font-medium text-gray-500 hover:text-teal-700">Herramientas</a>
-                    <a href="#registro" class="nav-link px-1 py-2 text-sm font-medium text-gray-500 hover:text-teal-700">Registro</a>
-                    <a href="#dashboard" class="nav-link px-1 py-2 text-sm font-medium text-gray-500 hover:text-teal-700">Dashboard</a>
+                    <a href="#inicio" class="nav-link px-1 py-2 text-base font-medium text-gray-500 hover:text-teal-700">Inicio</a>
+                    <a href="#metas" class="nav-link px-1 py-2 text-base font-medium text-gray-500 hover:text-teal-700">Mis Metas</a>
+                    <a href="#herramientas" class="nav-link px-1 py-2 text-base font-medium text-gray-500 hover:text-teal-700">Herramientas</a>
+                    <a href="#registro" class="nav-link px-1 py-2 text-base font-medium text-gray-500 hover:text-teal-700">Registro</a>
+                    <a href="#dashboard" class="nav-link px-1 py-2 text-base font-medium text-gray-500 hover:text-teal-700">Dashboard</a>
+                    <a href="#desarrolladores" class="nav-link px-1 py-2 text-base font-medium text-gray-500 hover:text-teal-700">Equipo</a>
                 </nav>
             </div>
         </div>
@@ -176,28 +181,19 @@
     <main class="container mx-auto p-4 md:p-6">
         <div class="space-y-24 md:space-y-32">
             
-            <section id="inicio" class="scroll-mt-24 reveal">
-                <div class="grid lg:grid-cols-2 gap-16 items-center py-16">
-                    <div class="text-left">
-                        <h2 class="text-5xl md:text-6xl font-bold text-gray-800 font-serif mb-6">Un Asistente de Bienestar Innovador</h2>
-                        <p class="max-w-2xl text-xl text-gray-600 mb-8">
-                           Saludbot es un sistema innovador que integra Inteligencia Artificial para analizar, visualizar y mejorar los hábitos de salud de estudiantes y sus familias.
-                        </p>
-                        <div class="space-y-4">
-                            <div class="flex items-start gap-3"><span class="text-2xl">✅</span><p class="text-lg text-gray-700"><strong class="font-semibold">Registra datos clave</strong> como alimentación, ejercicio, sueño e hidratación.</p></div>
-                            <div class="flex items-start gap-3"><span class="text-2xl">✅</span><p class="text-lg text-gray-700"><strong class="font-semibold">Visualiza el progreso</strong> en un dashboard interactivo con gráficos profesionales.</p></div>
-                            <div class="flex items-start gap-3"><span class="text-2xl">✅</span><p class="text-lg text-gray-700"><strong class="font-semibold">Recibe recomendaciones personalizadas</strong> generadas por IA.</p></div>
-                            <div class="flex items-start gap-3"><span class="text-2xl">✅</span><p class="text-lg text-gray-700"><strong class="font-semibold">Compara resultados</strong> con metas saludables y ve el impacto de tus cambios.</p></div>
+            <section id="inicio" class="scroll-mt-24 h-screen min-h-[700px] flex items-center -mt-20 -mx-4 md:-mx-6">
+                <div id="hero" class="w-full">
+                    <div class="container mx-auto px-6 text-center flex flex-col items-center justify-center h-full">
+                        <div class="flex items-center gap-6 md:gap-10 mb-8">
+                            <img src="Logoz.png" alt="Logo del Colegio" class="h-40 md:h-64 rounded-full shadow-lg">
+                             <img src="Logos.png" alt="Logo de SaludBot" class="h-48 md:h-72">
                         </div>
-                    </div>
-                    <div class="hidden lg:block">
-                        <div class="card p-4 aspect-[9/16] max-w-sm mx-auto shadow-2xl">
-                           <div class="bg-gray-100 rounded-lg h-full p-4 space-y-4">
-                               <div class="text-center"><p class="font-bold text-teal-700">Tu Dashboard</p></div>
-                               <div class="bg-white p-3 rounded-lg shadow-sm"><p class="text-xs font-medium text-gray-500">PROMEDIO SUEÑO</p><p class="text-2xl font-bold text-teal-600">7.2h</p></div>
-                               <div class="bg-white p-3 rounded-lg shadow-sm"><p class="text-xs font-medium text-gray-500">CUMPLIMIENTO DE METAS</p><div class="h-20 bg-gray-200 rounded-md mt-2 flex gap-1 p-1"><div class="bg-blue-300 w-1/4 rounded-sm"></div><div class="bg-green-300 w-2/4 rounded-sm"></div><div class="bg-amber-300 w-1/4 rounded-sm"></div></div></div>
-                               <div class="bg-gradient-to-br from-teal-50 to-emerald-100 p-3 rounded-lg shadow-sm"><p class="text-xs font-semibold text-teal-800">CONSEJO DEL DÍA</p><p class="text-sm text-teal-900 mt-1">¡Gran trabajo con el ejercicio! Un poco más de sueño podría potenciar tus resultados.</p></div>
-                           </div>
+                        <div class="card p-8 max-w-3xl">
+                             <h2 class="text-4xl md:text-5xl font-bold text-gray-800 font-serif mb-4">El Futuro del Bienestar Estudiantil</h2>
+                             <p class="text-xl text-gray-600 mb-8">
+                                 Una plataforma inteligente para construir hábitos saludables que duran toda la vida.
+                             </p>
+                             <a href="#metas" class="btn btn-primary text-lg px-8 py-3">Comenzar</a>
                         </div>
                     </div>
                 </div>
@@ -324,6 +320,21 @@
                     </div>
                 </div>
             </section>
+
+             <section id="desarrolladores" class="scroll-mt-24 reveal">
+                <div class="text-left mb-12 max-w-4xl mx-auto">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 font-serif">👨‍💻 Equipo de Desarrollo</h2>
+                    <p class="mt-3 text-lg text-gray-600">
+                        Este proyecto fue creado con dedicación por los talentosos estudiantes del <span class="font-semibold text-teal-700">Grupo 302</span> del <span class="font-semibold text-teal-700">COLEGIO XALOZTOC COATITLAN</span>.
+                    </p>
+                </div>
+                <div class="card p-8 max-w-4xl mx-auto">
+                    <div id="developer-list" class="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4 text-gray-700">
+                        <!-- Developer names will be injected here -->
+                    </div>
+                </div>
+            </section>
+
         </div>
     </main>
 
@@ -362,6 +373,12 @@
             { name: 'Brócoli', portion: '1 taza', calories: 55 }, { name: 'Espinaca', portion: '1 taza', calories: 7 }, { name: 'Zanahoria', portion: '1 mediana', calories: 25 }, { name: 'Tomate', portion: '1 mediano', calories: 22 }, { name: 'Pepino', portion: '1/2 mediano', calories: 20 },
             { name: 'Leche', portion: '1 taza', calories: 103 }, { name: 'Yogur Griego', portion: '1 taza', calories: 100 }, { name: 'Queso Cheddar', portion: '30g', calories: 114 }, { name: 'Queso Panela', portion: '30g', calories: 72 },
             { name: 'Refresco (Cola)', portion: '1 lata (355ml)', calories: 140 }, { name: 'Jugo de Naranja', portion: '1 taza', calories: 112 }, { name: 'Café negro', portion: '1 taza', calories: 2 }
+        ];
+        const developers = [
+            'CASTAÑEDA CRUZ ALONDRA', 'ENRIQUEZ RAMIREZ MIGUEL ANGEL', 'FLORES ALONZO ARELI MICHELLE', 
+            'FRIAS ORTIZ ZAID ISRAEL', 'HERNANDEZ ARCOS NAOMI AMELIE', 'LOPEZ ANGELES JEAN PABLO', 
+            'LOPEZ GUZMAN MISCHA LOOL BEH', 'MARTINEZ GARIBAY VANIA', 'MUÑOZ GONZALES DAVID', 
+            'OCAMPO SANCHEZ XIMENA', 'SANCHEZ BOLAÑOS TANIA', 'SOBERANES ROJAS RODRIGO', 'VILLALPANDO LARA RODRIGO'
         ];
 
         function recalculateCompliance() {
@@ -429,7 +446,7 @@
 
             try {
                 const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-                const apiKey = "AIzaSyCnab2aAJ8zVAULErGWnIc3ZaIvv4P1r4I";
+                const apiKey = "";
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -506,7 +523,7 @@
 
             try {
                 const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-                const apiKey = "AIzaSyCnab2aAJ8zVAULErGWnIc3ZaIvv4P1r4I";
+                const apiKey = "";
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -524,6 +541,16 @@
                 analyzeBtn.innerHTML = '✨ Analizar Comida con IA';
                 resultContainer.classList.remove('hidden');
             }
+        }
+
+        function renderDevelopers() {
+            const listEl = document.getElementById('developer-list');
+            listEl.innerHTML = '';
+            developers.forEach(name => {
+                const p = document.createElement('p');
+                p.textContent = name;
+                listEl.appendChild(p);
+            });
         }
 
         document.getElementById('metas-table-body').addEventListener('blur', (e) => { if (e.target.isContentEditable) { const key = e.target.dataset.key, value = parseFloat(e.target.textContent) || 0; METAS[key] = value; renderMetasTable(); renderRegistroTable(); } }, true);
@@ -619,6 +646,7 @@
             getAiRecommendation();
             renderPredeterminedFoods();
             renderCalculator();
+            renderDevelopers();
             document.querySelector('.nav-link[href="#inicio"]').classList.add('active');
         }
         init();
